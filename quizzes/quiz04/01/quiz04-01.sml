@@ -9,7 +9,7 @@ fun alphabeta_cycling_list():char stream = fn() =>
   let
     val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     fun cycle i = 
-      strcon_cons (String.sub(alphabet, i mod size(alphabet), 1), fn () => cycle (i + 1))
+      strcon_cons(String.sub(alphabet, i mod size(alphabet), 1), fn () => cycle (i + 1))
   in
     cycle 0
   end
