@@ -12,7 +12,7 @@ fun stream_supremov(fxs:int stream) = fn() =>
             else strcon_cons(x, fn () => help(x, xs()))
     in
         case xs of
-            Cons(x, xs') => Cons(x, fn () => help(x, xs'))
+            strcon_cons(x, xs') => strcon_cons(x, fn () => help(x, xs'))
         | strcon_nil => strcon_nil
     end
 (* ****** ****** *)
