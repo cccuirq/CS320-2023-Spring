@@ -7,10 +7,11 @@ Please put your implementation here for quiz04-01
 *)
 fun alphabeta_cycling_list():char stream = fn() =>
   let
-    fun help c =
-      strcon_cons(c, fn () => help(if c = 'Z' then 'A' else Char.chr(Char.ord c + 1)))
+    val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    fun cycle i = 
+      strcon_cons (String.sub(alphabet, i mod size(alphabet), 1), fn () => cycle (i + 1))
   in
-    help 'A'
+    cycle 0
   end
 (* ****** ****** *)
 
