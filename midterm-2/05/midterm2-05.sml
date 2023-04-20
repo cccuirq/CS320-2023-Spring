@@ -20,11 +20,22 @@ For instance, [1,2,3,4] does not capture '231'
 *)
 
 (* ****** ****** *)
+exception right
 
-(*
 fun
-perm_capture_231(xs: int list): bool = ...
-*)
+perm_capture_231(xs: int list): bool = 
+    let 
+        val n = list_length(xs)
+    in
+        let
+            val _ = foreach_to_iforeach(list_foreach)(xs, fn(i,j) => if (i >= n-2) then ()
+                                                                    else if (list_get_at(xs, i+2) < j andalso j < list_get_at(xs, i+1))
+                                                                        then raise right
+                                                                    else ())
+        in
+            false
+        end handle right => true
+    end
 
 (* ****** ****** *)
 
