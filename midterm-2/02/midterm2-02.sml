@@ -24,11 +24,19 @@ datatype 'a mytree =
 
 (* ****** ****** *)
 
-(*
+
 fun
-mytree_dfs_streamize(t0: 'a mytree): 'a stream = ...
-*)
-
+mytree_dfs_streamize(t0: 'a mytree): 'a stream =
+  let fun help(mytree_node(x,children)) =
+    let fun helper(children) =
+        case children of
+          [] => stream_nil()
+          | x::xs => stream_append(mytree_dfs_streamize(x), helper(xs))
+    in
+        stream_cons(x, fn() => helper(children)())
+    end
+  in
+    help(t0)
+  end
+    
 (* ****** ****** *)
-
-(* end of [CS320-2023-Spring-midterm2-02.sml] *)
