@@ -20,9 +20,20 @@ use "./../../mysmlib/mysmlib-cls.sml";
 
 (* ****** ****** *)
 
-(*
+
 fun
-stream_drawdowns(fxs: int stream): int list stream = ... *)
+stream_drawdowns(fxs: int stream): int list stream =
+    let fun help(cc, fxs) = fn() => 
+        case fxs() of
+        strcon_nil => strcon_nil
+        | strcon_cons(x, xs) =>
+            case cc of
+            [] => help([x], xs)()
+            |y::ys => if x <= y then help(x::cc, xs)()
+                    else strcon_cons(list_reverse(cc), help([x], xs))
+    in
+        help([], fxs)
+    end
 
 (* ****** ****** *)
 
